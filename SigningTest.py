@@ -15,7 +15,7 @@ privateKey = key.exportKey()
 publicKey = key.publickey().exportKey()
 lol = (privateKey[32::])[:-30]
 loled = (publicKey[27::])[:-25]
-print(loled)
+print(loled.hex())
 print(publicKey)
 message = "Hello World"
 h = SHA256.new(message.encode())
