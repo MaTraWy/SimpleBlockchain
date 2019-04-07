@@ -13,6 +13,8 @@ f.close()
 print(len(RIPEMD.new("loled").hexdigest()))
 privateKey = key.exportKey()
 publicKey = key.publickey().exportKey()
+print('print',key.encrypt())
+
 lol = (privateKey[32::])[:-30]
 loled = (publicKey[27::])[:-25]
 print(loled.hex())

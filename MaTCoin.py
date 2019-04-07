@@ -4,13 +4,14 @@ from Crypto.Signature import PKCS1_v1_5
 import pprint
 from datetime import datetime
 
+_author__ = "Mahmoud Matrawy"
 
 # A class contain all transaction data
 class Transaction:
 
     # class constructor, remember each transaction contain array of inputs and outputs
     def __init__(self, input, output):
-        self.input = input
+        self.input = input  # []
         self.output = output
 
     # this function to return array of bytes of the transaction data concatenated, later used for hashing
@@ -186,7 +187,7 @@ class Actor:
     def SendCoin(self, to, Amount):
         if len(self.utxo) == 0:  # check the utxp if empty, then he don't have coin!
             print('Address: ', self.address.hex(), " do not have coins")
-            return
+            return None
         listOfInput = []
         count = 0  # counter to know value for every input transaction
         # 3la 7sb b2a, mmoken ast5dm aktr mn input, 3shan msln lw input wa7d  mmoken mekfesh el coin el feh
@@ -201,7 +202,7 @@ class Actor:
 
         if (count < Amount):  # here the coin is not enough
             print('Address: ', self.address, " coins is not enough")
-            return
+            return None
 
         diff = count - Amount  # calculate the diff
         newTransaction = Transaction(listOfInput, [
@@ -418,7 +419,11 @@ while (True):
 
                 proceed = bool(input())
                 if proceed:
-                    Mahmoud.Mining(listOfPeers[peerChoice].SendCoin(listOfPeers[selected], amount), 2)
+                    tran = listOfPeers[peerChoice].SendCoin(listOfPeers[selected], amount)
+                    if (tran == None):
+                        break
+                    Mahmoud.pendingTransaction.append(tran)
+                    Mahmoud.Mining(2)
 
 # print(Mahmoud.getAddressCoin(Bob.address.hex()))
 # print(Mahmoud.getAddressCoin(Alice.address.hex()))
