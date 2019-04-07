@@ -357,12 +357,6 @@ print("Current users are : ", ", ".join(key for key in listOfPeers))
 print("Current miners are : ", ", ".join(key for key in listOfMiners))
 choice = 0
 
-'''data = []
-for user in listOfPeers:
-    data.append({user: listOfPeers[user].getUserData()})
-pprint.pprint(data)
-pprint.pprint(mainBlockchain.printAllTransaction())'''
-
 while (True):
     print("Please Choose through the list")
     print("Enter '0' to show current users data \n" +
@@ -391,28 +385,37 @@ while (True):
             peer + " (" + listOfPeers[peer].address.hex() + ") " + " -> " + str(listOfPeers[peer].amount) for peer in
             listOfPeers))
     if choice == 5:
+
         print("Please select one of the peers: " + ", ".join(peer for peer in listOfPeers))
         peerChoice = str(input())
+
         while (peerChoice not in listOfPeers):
             print("Invalid peer!!, Please select one of the peers: " + ", ".join(peer for peer in listOfPeers))
             peerChoice = str(input())
         print("\n You Selected peer: " + peerChoice)
+
         while (choice != -1):
             print("Please Choose through the list")
             print("Enter '0' to show current user data \n" +
                   "Enter '1' to send coin \n" +
                   "Enter '-1' to exit")
             choice = int(input())
+
+            if choice == -1:
+                break
             if choice == 0:
                 pprint.pprint(listOfPeers[peerChoice].getUserData())
             if choice == 1:
                 print("Please select the one you want send coin to ! " + " ".join(
                     (peer if peer != peerChoice else "") for peer in listOfPeers))
+
                 selected = str(input())
                 print("Please enter the amount of coin: ")
+
                 amount = int(input())
                 print("You selected the recipient peer name: " + selected + "and the amount to send " + str(amount))
                 print("you want to proceed 1/0")
+
                 proceed = bool(input())
                 if proceed:
                     Mahmoud.Mining(listOfPeers[peerChoice].SendCoin(listOfPeers[selected], amount), 2)
