@@ -148,7 +148,7 @@ class Blockchain:
     def resolveAddress(self, address):
         if address == "00":
             return "Gensis"
-        if address == "000":
+        if address == "0000":
             return "Reward"
         for peer in self.peers:
             if (self.peers[peer].address.hex() == address):
@@ -294,10 +294,10 @@ class Miner(Actor):
         minedBlock = Block(0, currentTime, self.pendingTransaction.copy(),
                            self.getTopBlock().hash, currentTarget)
 
-        #adding the reward transaction!
-        # src address 000 it's a mining fee
+        # adding the reward transaction!, fees for mining
+        # src address 0000 it's a mining fee
         minedBlock.transactionList.append(
-            Transaction([{'srcHash': '000', 'index': 0, 'srcAddress': '000'}, ]
+            Transaction([{'srcHash': '0000', 'index': 0, 'srcAddress': '0000'}, ]
                         ,
                         [{'amount': self.reward, 'DistAddress': self.address.hex()}, ]))
 
@@ -312,39 +312,46 @@ class Miner(Actor):
 
         print("Mined Successfully")
         self.pendingTransaction.clear()
-
-        # now lets create the reward transaction!
-
         self.blockchain.blockchain.append(minedBlock)
 
     def getTopBlock(self):
         return self.blockchain.blockchain[-1]
 
 
-mainBlockchain = Blockchain()
-pprint.sorted = lambda x, key=None: x
+mainBlockchain = Blockchain()  # take object from blockChain class
+pprint.sorted = lambda x, key=None: x  # here an configuration for pprint lib
 
-# intializing the users, we need to automate this part !!
+# initializing the users, @TODO we need to automate this part rather than hard coded!
 Alice = Actor('alice.pem', mainBlockchain)
 Bob = Actor('bob.pem', mainBlockchain)
 Joe = Actor('joe.pem', mainBlockchain)
-Mahmoud = Miner('mahmoud.pem', mainBlockchain)
+Mahmoud = Miner('mahmoud.pem', mainBlockchain)  # Mahmoud is the miner
 
 listOfPeers = {"Alice": Alice, "Bob": Bob, "Joe": Joe}
 listOfMiners = {"Mahmoud": Mahmoud}
-mainBlockchain.peers = listOfPeers
-listOfGensisTransaction = [{'amount': 50, 'address': Alice.address.hex()},
-                           {'amount': 150, 'address': Bob.address.hex()}]
-mainBlockchain.calcGensisBlock(listOfGensisTransaction, [Alice, Bob])
 
-tran = Alice.SendCoin(Bob, 10)
-Mahmoud.pendingTransaction.append(tran)
-Mahmoud.Mining(2)
+mainBlockchain.peers = listOfPeers
+
+listOfGensisTransaction = [{'amount': 50, 'address': Alice.address.hex()},
+                           {'amount': 150, 'address': Bob.address.hex()}] # Define the gensis transaction!
+
+mainBlockchain.calcGensisBlock(listOfGensisTransaction, [Alice, Bob]) # Calculate the gensis block
+Mahmoud.reward = 2 # setting mining reward
+
+# here a list of transaction to check if every thing is working properly
+
+# Alice send 10 coin to bob and add this transaction to pending transaction
+Mahmoud.pendingTransaction.append(Alice.SendCoin(Bob, 10))
+Mahmoud.Mining(2) # start mining !!
+
+# Alice send 40 coin to Bob and add this transaction to pending transaction
 Mahmoud.pendingTransaction.append(Alice.SendCoin(Bob, 40))
-Mahmoud.Mining(2)
+Mahmoud.Mining(2)# start mining !!
+
+# Bob send to Joe 40 coin and add this transaction to pending transaction
 Mahmoud.pendingTransaction.append(Bob.SendCoin(Joe, 40))
-# mainBlockchain.printBlockData()
 Mahmoud.Mining(2)
+
 print("Welcome to crypto currency simulator <MatCoin/>")
 print("Current users are : ", ", ".join(key for key in listOfPeers))
 print("Current miners are : ", ", ".join(key for key in listOfMiners))
