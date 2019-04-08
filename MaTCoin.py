@@ -4,7 +4,11 @@ from Crypto.Signature import PKCS1_v1_5
 import pprint
 from datetime import datetime
 
-_author__ = "Mahmoud Matrawy"
+__author__ = "Mahmoud Matrawy"
+
+'''The following project was created to simulate Bitcoin operations and functionality
+based on developer guide: https://www.lopp.net/pdf/Bitcoin_Developer_Reference.pdf
+feel free to contribute and add new functionality, check @Todo list'''
 
 # A class contain all transaction data
 class Transaction:
