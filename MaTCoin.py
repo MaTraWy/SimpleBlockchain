@@ -10,7 +10,7 @@ __author__ = "Mahmoud Matrawy"
 based on developer guide: https://www.lopp.net/pdf/Bitcoin_Developer_Reference.pdf
 feel free to contribute and add new functionality, check @Todo list'''
 
-# A class contain all transaction data
+# A class contain all transaction data 
 class Transaction:
 
     # class constructor, remember each transaction contain array of inputs and outputs
@@ -58,7 +58,6 @@ class Block:
         self.prevhash = prevhash
         self.target = target
         self.hash = ''
-        self.target = target
 
     # Calculate a hash of a block
     def calcHash(self):
