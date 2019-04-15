@@ -272,8 +272,8 @@ class Actor:
     # function to get user data in a printable format
     def getUserData(self):
         self.CalcAmount()
-        return {"Public key: ": (self.rsaKey.publickey().exportKey()[27::])[:-25].hex(),
-                "Private key: ": (self.rsaKey.exportKey()[32::])[:-30].hex(),
+        return {"Public key: ": self.rsaKey.publickey().exportKey().hex(),
+                "Private key: ": self.rsaKey.exportKey().hex(),
                 "Coin address:": self.address.hex(),
                 "Amount ": self.amount,
                 "Transaction UTXO": [tran['transaction'].calcTransactionHash().hex() for tran in self.utxo]}
