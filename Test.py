@@ -1,6 +1,13 @@
 import json
 import hashlib
 from Crypto.Hash import SHA256
+import numpy as np
+
+xt = np.random.randn(3,10)
+a_prev = np.random.randn(5,10)
+Waa = np.random.randn(5,5)
+Wax = np.random.randn(5,3)
+print(np.dot(Wax, xt))
 
 # a Python object (dict):
 x = {
@@ -8,6 +15,7 @@ x = {
   "age": 30,
   "city": "New York"
 }
+'''
 LL = 'MEW'
 KK = "00baf6626abc2df808da36a518c69f09b0d2ed0a79421ccfde4f559d2e42128b"
 KL = "00baf6626abc2df808da36a518c69f09b0d2ed0a79421ccfde4f559d2e42128b"
@@ -34,3 +42,4 @@ l = json.dumps(l).encode(encoding="utf8")
 print(l[0])
 # the result is a JSON string:
 #print(hashlib.sha256(l).hexdigest())
+'''
