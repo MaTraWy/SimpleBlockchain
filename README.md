@@ -17,7 +17,7 @@ The first python code is a fast tutorial on a pycrypto library, we will use it l
 
 The Second python code, is Blockchain Based Crypto Currency (Pay-To-Address Version), in this notebook I implemented the bitcoin that use plain address as input and output to transaction, you should go through the code and understand it, at the end of this file you will see assignment detail’s as you will be asked to make a console interface to use this coin, so you won’t be asked to implement one, only you will be asked to how to use it!.
 
-<Optional Bonus>3- Third Notebook: https://github.com/MaTraWy/SimpleBlockchain/blob/master/Simple%20Blockchain%20Assignment%20Version.ipynb
+Optional Bonus 3- Third Notebook: https://github.com/MaTraWy/SimpleBlockchain/blob/master/Simple%20Blockchain%20Assignment%20Version.ipynb
 
 The Third python code, is Blockchain Based Crypto Currency ( Pay-to-PubkeyHash (P2PKH) Version), in this notebook I implemented the bitcoin that use scripts as input and output to transaction, you only won’t be asked to implement it from scratch, just go through the code and you will find at the end of file, some empty function, you will be asked to implement.
 
