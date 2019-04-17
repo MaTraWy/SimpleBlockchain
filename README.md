@@ -21,3 +21,5 @@ Optional Bonus 3- Third Notebook: https://github.com/MaTraWy/SimpleBlockchain/bl
 
 The Third python code, is Blockchain Based Crypto Currency ( Pay-to-PubkeyHash (P2PKH) Version), in this notebook I implemented the bitcoin that use scripts as input and output to transaction, you only won’t be asked to implement it from scratch, just go through the code and you will find at the end of file, some empty function, you will be asked to implement.
 
+Please note that, you will asked to interpret specific part's in the code..
+
